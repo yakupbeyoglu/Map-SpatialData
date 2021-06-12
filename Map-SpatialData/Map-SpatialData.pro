@@ -1,5 +1,6 @@
 QT += quick
 QT += sql
+QT += core
 
 CONFIG += c++11
 
@@ -28,6 +29,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     Configs.h \
+    Types.h \
     application.h \
     builder.h \
     model.h

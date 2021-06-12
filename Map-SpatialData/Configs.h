@@ -10,6 +10,8 @@ namespace Application {
                 const static QString databasename = "AdvanceDatabase";
                 const static QString username = "yakup";
                 const static QString password = "yakup";
+
+
                 }
         }
 

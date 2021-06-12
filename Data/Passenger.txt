@@ -3,7 +3,7 @@ Passenger 2, 430, 633
 Passenger 3, 558, 602
 Passenger 4, 456, 473
 Passenger 5, 518, 394
-Passenger 6, 429. 412
+Passenger 6, 429, 412
 Passenger 7, 439, 401
 Passenger 8, 386, 311
 Passenger 9, 409, 356
@@ -17,5 +17,5 @@ Passenger 16, 175, 55
 Passenger 17, 198, 123
 Passenger 18, 193, 380
 Passenger 19, 215, 428
-Passenger 19, 223, 442
+Passenger 20, 223, 442
 Passenger 20, 377, 605
