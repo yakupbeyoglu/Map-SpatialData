@@ -1,6 +1,7 @@
 #include "model.h"
 #include <QtDebug>
 #include <QSqlError>
+#include <QSqlQuery>
 Model::Model(QString hostname, QString databasename,
              QString username, QString password) :
                         hostname(hostname), databasename(databasename),
@@ -21,4 +22,20 @@ Model::Model(QString hostname, QString databasename,
 bool  Model::IsConnect() {
         return isconnect;
 }
+
+bool Model::Insert(const QString &tablename, QString values) {
+        QSqlQuery query(database);
+        QString render  = "INSERT INTO "+tablename+" ";
+        query.prepare(render+"VALUES("+values+")");
+        if(query.exec())
+                return true;
+        else
+                return false;
+}
+
+bool Model::RunQuery(const QString &query) {
+
+
+}
+
 

@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "model.h"
+#include "builder.h"
 #include "Configs.h"
 #include <QtDebug>
 int main(int argc, char *argv[])
@@ -19,6 +20,15 @@ int main(int argc, char *argv[])
         }
         else
                 qDebug("not connected");
+        modeltest.Insert("busstops","3,\"yakup\",POINT(3,5)");
+
+        QString filename = "/home/yakup/git/Map-SpatialData/Data/Passenger.txt";
+
+        Builder build(filename);
+        auto parsed = build.ParseFile();
+
+
+
         QGuiApplication app(argc, argv);
 
         QQmlApplicationEngine engine;

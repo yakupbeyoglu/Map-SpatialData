@@ -8,6 +8,8 @@ class Model
 public:
         Model(QString hostname="", QString databasename="", QString username="", QString password="");
         bool IsConnect();
+        bool Insert(const QString &tablename, QString values);
+        bool RunQuery(const QString &query);
 
 
 
