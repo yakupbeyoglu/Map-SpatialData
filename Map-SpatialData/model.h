@@ -2,6 +2,7 @@
 #define MODEL_H
 #include <QString>
 #include <QSqlDatabase>
+#include "Types.h"
 
 class Model
 {
@@ -10,6 +11,7 @@ public:
         bool IsConnect();
         bool Insert(const QString &tablename, QString values);
         bool RunQuery(const QString &query);
+        void Load(const QString &tablename, const Application::Types::DataSet &set);
 
 
 

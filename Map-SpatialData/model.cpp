@@ -30,12 +30,32 @@ bool Model::Insert(const QString &tablename, QString values) {
         if(query.exec())
                 return true;
         else
-                return false;
+                qDebug() << database.lastError().text();
+
 }
 
 bool Model::RunQuery(const QString &query) {
 
 
+}
+
+void Model::Load(const QString &tablename, const Application::Types::DataSet &set) {
+        QRegExp reg("\\d*");
+        for(auto &l : set) {
+                QString values = "";
+                QString id;
+                if(reg.exactMatch(l.id))
+                        values += l.id;
+                else
+                        values += '\''+l.id+'\'';
+                values+=',';
+                values += l.name!=NULL ? '\''+l.name+"',":"";
+                //POINT(3,5)"
+                values += "POINT(" + QString::number(l.x) + ',' + QString::number(l.y) + ')';
+
+                if(!Insert(tablename,values))
+                       throw("Database Insert Error");
+        }
 }
 
 

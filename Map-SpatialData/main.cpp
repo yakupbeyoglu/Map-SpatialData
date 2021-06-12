@@ -20,12 +20,19 @@ int main(int argc, char *argv[])
         }
         else
                 qDebug("not connected");
-        modeltest.Insert("busstops","3,\"yakup\",POINT(3,5)");
 
-        QString filename = "/home/yakup/git/Map-SpatialData/Data/Passenger.txt";
+        QString passangerfilepath = "/home/yakup/git/Map-SpatialData/Data/Passenger.txt";
+        QString passangertablename = "passenger";
+        QString busstopsfilepath = "/home/yakup/git/Map-SpatialData/Data/busstops.txt";
+        QString busstopstablename = "busstops";
+        Builder buildpassanger(passangerfilepath);
+        Builder buildbusstops(busstopsfilepath);
 
-        Builder build(filename);
-        auto parsed = build.ParseFile();
+        auto parsedpassanger = buildpassanger.ParseFile();
+        auto parsedbusstops = buildbusstops.ParseFile();
+        modeltest.Load(passangertablename,parsedpassanger);
+        modeltest.Load(busstopstablename, parsedbusstops);
+
 
 
 
