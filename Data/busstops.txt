@@ -1,0 +1,11 @@
+1- Sosyal Konutlar O.D. , 541, 591
+2- Tufekci O.D. , 447, 446
+3- Tren Yolu O.D., 429, 400
+4- Gemikonagi O.D. , 346, 236
+5- V Yilmaz Aliminyum, 393, 58
+6- Gemikonagi O.D., 364, 50
+7- Hattusas , 150, 77
+8- Deniz Konagi O.D.,  189, 239
+9- LAU O.D., 225,409
+10- Dolmus Duragi, 198,429
+11- Yurtlar Otobus Duragi, 272, 476
