@@ -1,4 +1,5 @@
-QT += quick
+QT += quick \
+    widgets
 QT += sql
 QT += core
 
@@ -11,6 +12,7 @@ CONFIG += c++11
 SOURCES += \
         application.cpp \
         builder.cpp \
+        customwidget.cpp \
         main.cpp \
         model.cpp
 
@@ -32,4 +34,5 @@ HEADERS += \
     Types.h \
     application.h \
     builder.h \
+    customwidget.h \
     model.h

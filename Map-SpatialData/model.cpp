@@ -2,6 +2,7 @@
 #include <QtDebug>
 #include <QSqlError>
 #include <QSqlQuery>
+#include <QVector>
 #include <QString>
 namespace Application{
 Model::Model(QString hostname, QString databasename,
@@ -46,9 +47,11 @@ bool Model::Insert(const QString &tablename, QString values)const {
 
 
 
-QStringList Model::Select(const QString &tablename, const QString &columnname, QString id) const {
+Application::Types::DataSet Model::Select(const QString &tablename, const QString &columnname,
+                                          QString id) const {
         QStringList outputlist;
         QSqlQuery query(database);
+        Application::Types::DataSet dataset;
         //SELECT ST_AsText(g) FROM geom;
         QString column = columnname == "location" ? "ST_AsText(location)" : columnname;
         QString render = "SELECT "+column+" from "+ tablename;
@@ -58,19 +61,33 @@ QStringList Model::Select(const QString &tablename, const QString &columnname, Q
         if(query.exec()) {
                 while(query.next()) {
                         auto value = query.value(0).toString();
-                        qDebug()<<value;
+                        if(columnname == "id") {
+                                dataset.push_back({value,"",{0,0}});
+                        }
+                        else if (columnname == "name")
+                                dataset.push_back({"",value,{0,0}});
 
+                        else if (columnname == "location") {
+                                value.replace("POINT(","");
+                                value.replace(")","");
+                                QStringList values = value.split(QRegExp("[\r\n\t ]+"));
 
+                                Application::Types::Point point = {values.at(0).toInt(), values.at(1).toInt()};
+
+                                dataset.push_back({"",value,point});
+                        }
+                }
+                for(auto &l : dataset) {
+                        qDebug()<<l.id<<" "<<l.name<<" "<< l.point.x<<" "<<l.point.y;
                 }
         }
-        return outputlist;
-
+        return dataset;
 }
 
-QString Model::Select(int id)const {
+Application::Types::Point Model::Select(int id)const {
         QSqlQuery query(database);
         //SELECT ST_AsText(g) FROM geom;
-
+        Application::Types::Point point = {0,0};
         QString render = "SELECT ST_AsText(location) from busstops WHERE id = "+QString::number(id)+';';
         query.prepare(render);
         if(query.exec()) {
@@ -80,18 +97,13 @@ QString Model::Select(int id)const {
                         z.replace(")","");
                         QStringList l = z.split(QRegExp("[\r\n\t ]+"));
 
-                        qDebug()<<z;
+                         point = {l.at(0).toInt(), l.at(1).toInt()};
                 }
         }
-
-
+        return point;
 }
 
-bool Model::RunQuery(const QString &query)const {
-
-
-}
-
+// load fwill load data to database
 void Model::Load(const QString &tablename, const Application::Types::DataSet &set) {
         QRegExp reg("\\d*");
         for(auto &l : set) {
@@ -103,8 +115,8 @@ void Model::Load(const QString &tablename, const Application::Types::DataSet &se
                         values += '\''+l.id+'\'';
                 values+=',';
                 values += l.name!=NULL ? '\''+l.name+"',":"";
-                //POINT(3,5)"
-                values += "POINT(" + QString::number(l.x) + ',' + QString::number(l.y) + ')';
+
+                values += "POINT(" + QString::number(l.point.x) + ',' + QString::number(l.point.y) + ')';
 
                 if(!Insert(tablename,values))
                        throw("Database Insert Error");

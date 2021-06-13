@@ -1,5 +1,5 @@
-#include <QGuiApplication>
-#include <QQmlApplicationEngine>
+#include <QApplication>
+#include "customwidget.h"
 #include "model.h"
 #include "builder.h"
 #include "Configs.h"
@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
         else
                 qDebug("not connected");
        // modeltest.Select(5);
-       auto v =  modeltest.Select("busstops","name");
+       auto v =  modeltest.Select("busstops","location");
      //   QStringList Model::Select(const QString &tablename, const QString &columnname, QString id)
 
       /*  QString passangerfilepath = "/home/yakup/git/Map-SpatialData/Data/Passenger.txt";
@@ -37,16 +37,10 @@ int main(int argc, char *argv[])
         modeltest.Load(busstopstablename, parsedbusstops);*/
 
 
-        QGuiApplication app(argc, argv);
-
-        QQmlApplicationEngine engine;
-        const QUrl url(QStringLiteral("qrc:/main.qml"));
-        QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
-                         &app, [url](QObject *obj, const QUrl &objUrl) {
-                if (!obj && url == objUrl)
-                        QCoreApplication::exit(-1);
-        }, Qt::QueuedConnection);
-        engine.load(url);
+       QApplication app(argc, argv);
+       //MainWindow w;
+       CustomWidget w;
+       w.show();
 
         return app.exec();
 }

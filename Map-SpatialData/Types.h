@@ -5,12 +5,18 @@
 namespace Application {
         namespace Types {
 
+                struct Point{
+                        int x;
+                        int y;
+                };
+
                 struct Data{
                    QString id;
                    QString name;
-                   int x;
-                   int y;
+                   Point point;
                 };
+
+
 
                 using DataSet = QVector<Data>;
         }
