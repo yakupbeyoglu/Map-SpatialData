@@ -17,8 +17,8 @@ public:
 
         bool IsConnect()const;
         bool Insert(const QString &tablename, QString values)const;
-        QString Select(int id)const;
-        QStringList Select(const QString &tablename, const QString &columnname, QString id="") const;
+        Application::Types::Point Select(int id)const;
+        Application::Types::DataSet Select(const QString &tablename, const QString &columnname, QString id="") const;
         bool RunQuery(const QString &query)const;
         void Load(const QString &tablename, const Application::Types::DataSet &set);
 
