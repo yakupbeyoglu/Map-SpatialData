@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
         QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
 //Model(QString hostname="", QString databasename="", QString username="", QString password="");
-        Model modeltest(Application::Configs::Model::hostname,
+        Application::Model modeltest(Application::Configs::Model::hostname,
                         Application::Configs::Model::databasename,
                         Application::Configs::Model::username,
                         Application::Configs::Model::password);
@@ -20,8 +20,11 @@ int main(int argc, char *argv[])
         }
         else
                 qDebug("not connected");
+       // modeltest.Select(5);
+       auto v =  modeltest.Select("busstops","name");
+     //   QStringList Model::Select(const QString &tablename, const QString &columnname, QString id)
 
-        QString passangerfilepath = "/home/yakup/git/Map-SpatialData/Data/Passenger.txt";
+      /*  QString passangerfilepath = "/home/yakup/git/Map-SpatialData/Data/Passenger.txt";
         QString passangertablename = "passenger";
         QString busstopsfilepath = "/home/yakup/git/Map-SpatialData/Data/busstops.txt";
         QString busstopstablename = "busstops";
@@ -31,9 +34,7 @@ int main(int argc, char *argv[])
         auto parsedpassanger = buildpassanger.ParseFile();
         auto parsedbusstops = buildbusstops.ParseFile();
         modeltest.Load(passangertablename,parsedpassanger);
-        modeltest.Load(busstopstablename, parsedbusstops);
-
-
+        modeltest.Load(busstopstablename, parsedbusstops);*/
 
 
         QGuiApplication app(argc, argv);
