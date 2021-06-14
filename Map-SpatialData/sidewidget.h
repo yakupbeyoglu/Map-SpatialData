@@ -24,10 +24,14 @@ public slots :
         void busstopschanged(int state);
         void passengerschanged(int state);
         void GetAllPoints(bool state);
+        void CovarageChanged();
+        void SelectedBoxChanged(bool state);
 signals :
         void buseventcall(int state);
         void passengereventcall(int state);
         void wholeareaselection(bool busstate, bool passengerstate);
+        void CovaregeClicked();
+        void SelectedBoxSelection(bool state);
 private:
         QVBoxLayout *vlayout;
 

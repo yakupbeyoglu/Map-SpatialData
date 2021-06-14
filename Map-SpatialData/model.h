@@ -19,6 +19,7 @@ public:
         bool Insert(const QString &tablename, QString values)const;
         Application::Types::Point Select(int id)const;
         Application::Types::DataSet Select(const QString &tablename, const QString &columnname, QString id="") const;
+        Application::Types::DataSet SelectCovarage() const;
         bool RunQuery(const QString &query)const;
         void Load(const QString &tablename, const Application::Types::DataSet &set);
 

@@ -56,7 +56,7 @@ void Footer::SetMessagebox(const QString &query, const Application::Types::DataS
       }
 
        for(auto &l : list) {
-                        textedit->insertPlainText(l + "\n");
+               textedit->insertPlainText(l + "\n");
        }
 
        textedit->insertPlainText("\n\n");
