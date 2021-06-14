@@ -1,11 +1,19 @@
-#ifndef APPLICATION_H
-#define APPLICATION_H
-
-
+#pragma once
+#include <QApplication>
+#include "applicationwidget.h"
+#include "model.h"
+#include "Types.h"
+namespace Application {
 class Application
 {
 public:
-        Application();
-};
+        Application(int argc, char *argv[]);
 
-#endif // APPLICATION_H
+private :
+        QApplication app;
+        Model *model;
+        ApplicationWidget w;
+};
+}
+
+

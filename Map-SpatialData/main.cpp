@@ -4,11 +4,10 @@
 #include "builder.h"
 #include "Configs.h"
 #include <QtDebug>
+#include "application.h"
 int main(int argc, char *argv[])
 {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-#endif
+
 //Model(QString hostname="", QString databasename="", QString username="", QString password="");
         Application::Model modeltest(Application::Configs::Model::hostname,
                         Application::Configs::Model::databasename,
@@ -36,11 +35,7 @@ int main(int argc, char *argv[])
         modeltest.Load(passangertablename,parsedpassanger);
         modeltest.Load(busstopstablename, parsedbusstops);*/
 
+       Application::Application app(argc,argv);
 
-       QApplication app(argc, argv);
-       //MainWindow w;
-       CustomWidget w;
-       w.show();
-
-        return app.exec();
+//        return app.exec();
 }

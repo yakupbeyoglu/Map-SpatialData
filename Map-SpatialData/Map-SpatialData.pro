@@ -11,10 +11,13 @@ CONFIG += c++11
 
 SOURCES += \
         application.cpp \
+        applicationwidget.cpp \
         builder.cpp \
         customwidget.cpp \
+        footer.cpp \
         main.cpp \
-        model.cpp
+        model.cpp \
+        sidewidget.cpp
 
 RESOURCES += qml.qrc
 
@@ -33,6 +36,12 @@ HEADERS += \
     Configs.h \
     Types.h \
     application.h \
+    applicationwidget.h \
     builder.h \
     customwidget.h \
-    model.h
+    footer.h \
+    model.h \
+    sidewidget.h
+
+DISTFILES += \
+    Assets/lefke-image.jpg
