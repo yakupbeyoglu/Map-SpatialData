@@ -45,11 +45,34 @@ bool Model::Insert(const QString &tablename, QString values)const {
                 return false;
 }
 
+Application::Types::DataSet Model::SelectCovarage() const {
+        QSqlQuery query(database);
+        Application::Types::DataSet dataset;
+        QString render = "SELECT ST_ASTEXT(passenger.location) from busstops, passenger where ST_Distance(passenger.location,busstops.location) < 100";
+
+        query.prepare(render);
+        if(query.exec()) {
+                while(query.next()) {
+                        auto value = query.value(0).toString();
+                        value.replace("POINT(","");
+                        value.replace(")","");
+                        QStringList values = value.split(QRegExp("[\r\n\t ]+"));
+                        Application::Types::Point point = {values.at(0).toInt(), values.at(1).toInt()};
+                        dataset.push_back({"",value,point});
+
+                }
+                for(auto &l : dataset) {
+                        qDebug()<<l.id<<" "<<l.name<<" "<< l.point.x<<" "<<l.point.y;
+                }
+        }
+        return dataset;
+}
+
+
 
 
 Types::DataSet Model::Select(const QString &tablename, const QString &columnname,
                                           QString id) const {
-        QStringList outputlist;
         QSqlQuery query(database);
         Application::Types::DataSet dataset;
         //SELECT ST_AsText(g) FROM geom;

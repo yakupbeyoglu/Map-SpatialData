@@ -41,8 +41,17 @@ public:
 
                 QObject::connect(sidewidget,&SideWidget::passengereventcall,
                                  mainwidget, &CustomWidget::PassengerStateChange);
+
                 QObject::connect(sidewidget,&SideWidget::wholeareaselection,
                                 this, &ApplicationWidget::SelectWholeArea);
+
+                QObject::connect(sidewidget,&SideWidget::CovaregeClicked,
+                                this, &ApplicationWidget::ShowCovorage);
+
+                QObject::connect(sidewidget, &SideWidget::SelectedBoxSelection,
+                                mainwidget, &CustomWidget::SetClickStatus);
+
+
 
         }
 
@@ -79,6 +88,27 @@ public:
 
         }
 
+        void SetClick(const QPoint &clicked) {
+                lastclick = clicked;
+        }
+
+        void ShowCovorage() {
+              auto covorage  = model->SelectCovarage();
+              mainwidget->SetCovarage(covorage);
+              QString query  = "select ST_ASTEXT(passenger.location) from busstops, passenger where ST_Distance(passenger.location,busstops.location) < 100;";
+              footer->SetMessagebox(query, {},{},covorage);
+
+        }
+
+        void GetQuery() {
+                if(lastclick.x() != -1 & lastclick.y() != -1) {
+
+
+
+                }
+
+        }
+
 
 
 private:
@@ -87,5 +117,6 @@ private:
         Footer *footer;
         QGridLayout * layout;
         Application::Model *model;
+        QPoint lastclick ={-1,-1};
 };
 

@@ -98,6 +98,8 @@ SideWidget::SideWidget(QWidget *parent) : QWidget(parent)
         connect(busstops,SIGNAL(stateChanged(int)),this,SLOT(busstopschanged(int)));
         connect(passenger,SIGNAL(stateChanged(int)),this,SLOT(passengerschanged(int)));
         connect(wholearea, SIGNAL(clicked(bool)),this, SLOT(GetAllPoints(bool)));
+        connect(checkcoverage,SIGNAL(clicked()),this, SLOT(CovarageChanged()));
+        connect(selectedbox, SIGNAL(clicked(bool)),this, SLOT(SelectedBoxChanged(bool)));
 
 
 
@@ -107,9 +109,15 @@ SideWidget::~SideWidget(){
         delete x;
         delete y;
 }
+
 void SideWidget::GetCoordination(const QPoint &point) {
         SetCoordination(point);
 }
+
+void SideWidget::CovarageChanged() {
+        emit CovaregeClicked();
+}
+
 void SideWidget::GetAllPoints(bool state) {
         qDebug()<<"gene basdik";
         bool busstate = false;
@@ -121,7 +129,13 @@ void SideWidget::GetAllPoints(bool state) {
                         passengerstate = true;
 
                 emit wholeareaselection(busstate, passengerstate);
+                emit SelectedBoxSelection(false);
         }
+}
+
+void SideWidget::SelectedBoxChanged(bool state) {
+        emit SelectedBoxSelection(state);
+
 }
 
 void SideWidget::SetCoordination(const QPoint &point) {
