@@ -55,7 +55,6 @@ public:
       if(event->button() == Qt::LeftButton)
           bussesrectangles.push_back(QRect{QPoint(m_mousePos.x(),m_mousePos.y()), QSize(100,100)});
       else if (event->button() == Qt::RightButton){
-              bussesrectangles.clear();
       }
       update();
    }
