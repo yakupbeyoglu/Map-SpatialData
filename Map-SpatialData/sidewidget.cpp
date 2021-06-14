@@ -93,11 +93,11 @@ SideWidget::SideWidget(QWidget *parent) : QWidget(parent)
 
         vlayout->addLayout(featurelayout);
         vlayout->addLayout(coordinatelayout);
-
+        wholearea->setChecked(true);
         setLayout(vlayout);
         connect(busstops,SIGNAL(stateChanged(int)),this,SLOT(busstopschanged(int)));
         connect(passenger,SIGNAL(stateChanged(int)),this,SLOT(passengerschanged(int)));
-
+        connect(wholearea, SIGNAL(clicked(bool)),this, SLOT(GetAllPoints(bool)));
 
 
 
@@ -110,6 +110,19 @@ SideWidget::~SideWidget(){
 void SideWidget::GetCoordination(const QPoint &point) {
         SetCoordination(point);
 }
+void SideWidget::GetAllPoints(bool state) {
+        qDebug()<<"gene basdik";
+        bool busstate = false;
+        bool passengerstate = false;
+        if(state) {
+                if(busstops->checkState())
+                        busstate=  true;
+                if(passenger->checkState())
+                        passengerstate = true;
+
+                emit wholeareaselection(busstate, passengerstate);
+        }
+}
 
 void SideWidget::SetCoordination(const QPoint &point) {
         x->setText(QString::number(point.x()));
@@ -118,10 +131,14 @@ void SideWidget::SetCoordination(const QPoint &point) {
 }
 
 void SideWidget::busstopschanged(int state) {
-        qDebug()<<"i am changed to "<<state;
         emit buseventcall(state);
+        if(wholearea->isChecked())
+                emit wholeareaselection(busstops->checkState(), passenger->checkState());
 }
 void SideWidget::passengerschanged(int state) {
         emit passengereventcall(state);
+        if(wholearea->isChecked())
+                emit wholeareaselection(busstops->checkState(), passenger->checkState());
+
 
 }

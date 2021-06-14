@@ -1,5 +1,6 @@
 #include "application.h"
 #include "Configs.h"
+#include "Types.h"
 namespace Application {
 
 Application::Application(int argc, char *argv[]):app(argc, argv)
@@ -24,5 +25,6 @@ Application::Application(int argc, char *argv[]):app(argc, argv)
         app.exec();
 
 }
+
 
 }

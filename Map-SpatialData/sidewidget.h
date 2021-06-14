@@ -23,9 +23,11 @@ public slots :
         void GetCoordination(const QPoint &point);
         void busstopschanged(int state);
         void passengerschanged(int state);
+        void GetAllPoints(bool state);
 signals :
         void buseventcall(int state);
         void passengereventcall(int state);
+        void wholeareaselection(bool busstate, bool passengerstate);
 private:
         QVBoxLayout *vlayout;
 
