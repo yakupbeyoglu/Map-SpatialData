@@ -47,7 +47,7 @@ bool Model::Insert(const QString &tablename, QString values)const {
 
 
 
-Application::Types::DataSet Model::Select(const QString &tablename, const QString &columnname,
+Types::DataSet Model::Select(const QString &tablename, const QString &columnname,
                                           QString id) const {
         QStringList outputlist;
         QSqlQuery query(database);
