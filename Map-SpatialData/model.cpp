@@ -48,7 +48,7 @@ bool Model::Insert(const QString &tablename, QString values)const {
 Application::Types::DataSet Model::SelectCovarage() const {
         QSqlQuery query(database);
         Application::Types::DataSet dataset;
-        QString render = "SELECT ST_ASTEXT(passenger.location) from busstops, passenger where ST_Distance(passenger.location,busstops.location) < 100";
+        QString render = "SELECT ST_ASTEXT(passenger.location) from busstops, passenger where ST_Distance(passenger.location,busstops.location) < 50";
 
         query.prepare(render);
         if(query.exec()) {
@@ -145,6 +145,18 @@ void Model::Load(const QString &tablename, const Application::Types::DataSet &se
                        throw("Database Insert Error");
         }
 }
+bool Model::Clear(QString tablename) {
+        QSqlQuery query(database);
+        //SELECT ST_AsText(g) FROM geom;
+        Application::Types::Point point = {0,0};
+        QString render = "Delete from "+ tablename +';';
+        query.prepare(render);
+        if(query.exec())
+                return true;
+        return false;
+
+}
+
 }
 
 

@@ -22,6 +22,7 @@ public:
         Application::Types::DataSet SelectCovarage() const;
         bool RunQuery(const QString &query)const;
         void Load(const QString &tablename, const Application::Types::DataSet &set);
+        bool Clear(QString tablename);
 
 
 
