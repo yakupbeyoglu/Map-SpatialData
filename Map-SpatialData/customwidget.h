@@ -46,7 +46,7 @@ public:
 
             painter.setPen(QPen{Qt::green, 3, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin});
 
-            if(showcovrage)
+            if(showcovrage && showpassangers)
                     for(auto &l:checkcovarege)
                             painter.drawEllipse(l);
 

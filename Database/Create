@@ -1,2 +1,3 @@
 create table busstops (id int, name VARCHAR(40), location Geometry);
 create table passenger (id VARCHAR(30),location Geometry)
+
